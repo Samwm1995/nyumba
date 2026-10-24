@@ -1,0 +1,48 @@
+import type { Metadata, Viewport } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import "./globals.css";
+import { Nav } from "@/components/nav";
+
+
+export const metadata: Metadata = {
+  title: { default: "Nyumba ya Wachagga", template: "%s · Nyumba ya Wachagga" },
+  description: "Learn Kichagga in its dialects and keep Chagga culture alive — Vijana wa Kichagga, Kilimanjaro ni kwetu.",
+  manifest: "/manifest.webmanifest",
+  icons: { icon: "/icon-192.png", apple: "/icon-192.png" },
+};
+
+export const viewport: Viewport = { themeColor: "#0b1f33" };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="sw" className="h-full antialiased">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+      </head>
+      <body className="flex min-h-full flex-col">
+        <header className="sticky top-0 z-30 border-b border-silver/60 bg-background/90 backdrop-blur">
+          <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
+            <Link href="/" className="flex items-center gap-3">
+              <Image src="/crest.png" alt="" width={44} height={44} priority />
+              <span className="font-display text-base font-bold leading-tight text-navy sm:text-lg">
+                Nyumba ya <span className="hidden sm:inline">Wachagga</span>
+                <span className="sm:hidden">Wachagga</span>
+              </span>
+            </Link>
+            <Nav />
+          </div>
+        </header>
+        <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
+        <footer className="border-t border-silver/60 bg-navy text-ivory">
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
+            <p className="font-display font-semibold tracking-wide">Vijana wa Kichagga · Kilimanjaro ni Kwetu</p>
+            <p className="text-silver">Kizazi Kipya · Built by the community, for the community.</p>
+          </div>
+        </footer>
+      </body>
+    </html>
+  );
+}

@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: "Cinzel";
+  --font-body: "Source Sans 3";
+  --navy: #0b1f33;
+  --navy-2: #14365c;
+  --ivory: #f3f0e6;
+  --silver: #c9d3dd;
+  --coffee: #5c3a21;
+  --coffee-2: #3b2314;
+  --amber: #e07a2f;
+  --cherry: #b5121b;
+  --background: #faf8f2;
+  --foreground: #14202b;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-ivory: var(--ivory);
+  --color-silver: var(--silver);
+  --color-coffee: var(--coffee);
+  --color-coffee-2: var(--coffee-2);
+  --color-amber: var(--amber);
+  --color-cherry: var(--cherry);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+@layer components {
+.card {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--silver) 60%, transparent);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(11, 31, 51, 0.06);
+  display: block;
+}
+
+.btn, .btn-primary, .btn-secondary, .btn-amber {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: background-color 0.15s, filter 0.15s;
+  cursor: pointer;
+}
+.btn-primary { background: var(--navy); color: var(--ivory); }
+.btn-primary:hover { background: var(--navy-2); }
+.btn-primary:disabled { opacity: 0.6; cursor: wait; }
+.btn-secondary { background: #fff; color: var(--navy); border: 1px solid rgba(11, 31, 51, 0.2); }
+.btn-secondary:hover { background: var(--ivory); }
+.btn-amber { background: var(--amber); color: var(--navy); }
+.btn-amber:hover { filter: brightness(1.08); }
+
+.ch {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+}
