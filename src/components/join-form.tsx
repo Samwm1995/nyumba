@@ -4,6 +4,7 @@ import { dialects } from "@/content/dialects";
 import Link from "next/link";
 import { sendMagicLink, useAuth } from "@/lib/auth";
 import { Bi, useLang } from "./lang";
+import { SignIn } from "./sign-in";
 
 // Registration has two paths. Both create an account (magic link by email); the DB trigger
 // copies the details into the profile, opens a pending membership and (visitors) a trip lead.
@@ -23,9 +24,10 @@ function useRegister() {
 
 function Sent({ email, sw, en }: { email: string; sw: string; en: string }) {
   return (
-    <div className="card mt-4 border-amber/60 bg-amber/10 p-6">
+    <div className="mt-4 space-y-3">
       <p className="font-display text-xl font-bold text-navy"><Bi sw="Karibu Nyumbani!" en="Welcome home!" /></p>
-      <p className="mt-2 text-foreground/80"><Bi sw={<>Tumetuma kiungo cha kuingia kwa <b>{email}</b>. Bonyeza kiungo hicho ili kufungua akaunti yako. {sw}</>} en={<>We sent a sign-in link to <b>{email}</b>. Open it to activate your account. {en}</>} /></p>
+      <SignIn presetEmail={email} next="/akaunti" />
+      {(sw || en) && <p className="text-sm text-foreground/70"><Bi sw={sw} en={en} /></p>}
     </div>
   );
 }
