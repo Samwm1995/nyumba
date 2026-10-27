@@ -7,8 +7,10 @@ const links = [
   { href: "/jifunze", label: "Jifunze", en: "Learn" },
   { href: "/linganisha", label: "Linganisha", en: "Compare" },
   { href: "/utamaduni", label: "Utamaduni", en: "Culture" },
+  { href: "/vivutio", label: "Vivutio", en: "Visit" },
   { href: "/changia", label: "Changia", en: "Contribute" },
   { href: "/jumuiya", label: "Jumuiya", en: "Community" },
+  { href: "/unga-mkono", label: "Unga mkono", en: "Support" },
 ];
 
 export function Nav() {
@@ -16,22 +18,22 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <nav className="hidden gap-1 md:flex" aria-label="Main">
+      <nav className="hidden gap-1 lg:flex" aria-label="Main">
         {links.map((l) => {
           const active = path.startsWith(l.href);
           return (
             <Link
               key={l.href}
               href={l.href}
-              className={`rounded-lg px-3 py-2 text-sm font-semibold ${active ? "bg-navy text-ivory" : "text-navy hover:bg-ivory"}`}
+              className={`rounded-lg px-2.5 py-2 text-sm font-semibold ${active ? "bg-navy text-ivory" : l.href === "/unga-mkono" ? "bg-amber/20 text-navy hover:bg-amber/40" : "text-navy hover:bg-ivory"}`}
             >
-              {l.label} <span className="font-normal opacity-60">· {l.en}</span>
+              {l.label}
             </Link>
           );
         })}
       </nav>
       <button
-        className="btn-secondary md:hidden"
+        className="btn-secondary lg:hidden"
         aria-expanded={open}
         aria-label="Menu"
         onClick={() => setOpen((o) => !o)}
@@ -41,7 +43,7 @@ export function Nav() {
         </svg>
       </button>
       {open && (
-        <nav className="absolute inset-x-0 top-full border-b border-silver/60 bg-white p-2 shadow-lg md:hidden" aria-label="Main">
+        <nav className="absolute inset-x-0 top-full border-b border-silver/60 bg-white p-2 shadow-lg lg:hidden" aria-label="Main">
           {links.map((l) => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-navy hover:bg-ivory">
               {l.label} <span className="font-normal opacity-60">· {l.en}</span>

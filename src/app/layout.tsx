@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t border-silver/60 bg-navy text-ivory">
           <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
             <p className="font-display font-semibold tracking-wide">Vijana wa Kichagga · Kilimanjaro ni Kwetu</p>
-            <p className="text-silver">Kizazi Kipya · Built by the community, for the community.</p>
+            <p className="text-silver">Kizazi Kipya · <Link href="/unga-mkono" className="underline">Unga mkono</Link> · <Link href="/wadhamini" className="underline">Wadhamini</Link> · <Link href="/vivutio" className="underline">Vivutio</Link></p>
           </div>
         </footer>
       </body>
