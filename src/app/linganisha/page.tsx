@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { dialects } from "@/content/dialects";
+import { Bi } from "@/components/lang";
 
 export const metadata = { title: "Linganisha · Compare dialects" };
 
@@ -23,16 +24,16 @@ export default function Compare() {
   const data = rows();
   return (
     <div>
-      <h1 className="font-display text-3xl font-black text-navy">Linganisha lahaja</h1>
+      <h1 className="font-display text-3xl font-black text-navy"><Bi sw="Linganisha lahaja" en="Compare dialects" /></h1>
       <p className="mt-2 max-w-2xl text-foreground/80">
-        The same phrase across the dialects, side by side. Empty cells are waiting for a speaker of that dialect —
-        <Link href="/changia" className="underline"> fill one in</Link>.
+        <Bi sw={<>Msemo uleule kwa lahaja zote, bega kwa bega. Visanduku tupu vinasubiri mzungumzaji wa lahaja hiyo — <Link href="/changia" className="underline">jaza kimoja</Link>.</>}
+            en={<>The same phrase across the dialects, side by side. Empty cells are waiting for a speaker of that dialect — <Link href="/changia" className="underline">fill one in</Link>.</>} />
       </p>
       <div className="card mt-6 overflow-x-auto">
         <table className="w-full min-w-[640px] text-sm">
           <thead className="bg-navy text-left text-ivory">
             <tr>
-              <th className="p-3">English</th>
+              <th className="p-3"><Bi sw="Kiingereza" en="English" /></th>
               {dialects.map((d) => <th key={d.slug} className="p-3">{d.name}</th>)}
             </tr>
           </thead>
