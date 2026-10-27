@@ -7,9 +7,10 @@ export default function Community() {
   return (
     <div className="grid gap-8 md:grid-cols-2">
       <section>
-        <h1 className="font-display text-3xl font-black text-navy">Jumuiya · Community</h1>
+        <h1 className="font-display text-3xl font-black text-navy">Jiunge · Join</h1>
         <p className="mt-2 text-foreground/80">
-          Join the register so we can reach you for recordings, verification and meetups. Tell us your dialect and whether you can record elders in your area.
+          Wachagga nyumbani na ughaibuni, na wageni wanaopanda Kilimanjaro — kila mmoja ana nafasi yake. Chagua njia yako hapa chini.
+          <br /><span className="text-foreground/60">Chagga at home and abroad, and visitors climbing Kilimanjaro — pick your path below.</span>
         </p>
         <JoinForm />
       </section>

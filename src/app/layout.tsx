@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
 import { Nav } from "@/components/nav";
+import { LangProvider, LangToggle } from "@/components/lang";
 
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="flex min-h-full flex-col">
+        <LangProvider>
         <header className="sticky top-0 z-30 border-b border-silver/60 bg-background/90 backdrop-blur">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
             <Link href="/" className="flex items-center gap-3">
@@ -32,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="sm:hidden">Wachagga</span>
               </span>
             </Link>
-            <Nav />
+            <div className="flex items-center gap-2"><LangToggle /><Nav /></div>
           </div>
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
@@ -42,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p className="text-silver">Kizazi Kipya · <Link href="/unga-mkono" className="underline">Unga mkono</Link> · <Link href="/wadhamini" className="underline">Wadhamini</Link> · <Link href="/vivutio" className="underline">Vivutio</Link></p>
           </div>
         </footer>
+        </LangProvider>
       </body>
     </html>
   );

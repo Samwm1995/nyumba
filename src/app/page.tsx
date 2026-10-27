@@ -24,6 +24,7 @@ export default function Home() {
             <Link href="/jifunze/vunjo/salamu" className="btn-primary">Anza somo la 1 · Salamu</Link>
             <Link href="/jifunze/vunjo" className="btn-secondary">Masomo yote</Link>
           </div>
+          <p className="mt-3 text-sm text-foreground/70">Climbing Kilimanjaro? <Link href="/jumuiya" className="underline">Learn the greetings your guides use →</Link></p>
           <p className="mt-4 text-sm text-foreground/60">
             Kimachame, Kikibosho na Kirombo zinakuja — tunatafuta wazungumzaji. <Link href="/changia" className="underline">Changia sauti yako</Link>.
           </p>
