@@ -1,5 +1,5 @@
-export type Phrase = { en: string; ch: string; reply?: string; audio?: string };
-export type Drill = { en: string; q: string; yes: string; no: string; audio?: string };
+export type Phrase = { en: string; sw?: string; ch: string; reply?: string; audio?: string };
+export type Drill = { en: string; sw?: string; q: string; yes: string; no: string; audio?: string };
 
 export type Lesson = {
   slug: string;
@@ -10,7 +10,7 @@ export type Lesson = {
 };
 
 export type GrammarCard = { title: string; body: string; examples: [string, string][] };
-export type Conversation = { title: string; lines: [string, string][] };
+export type Conversation = { title: string; lines: [string, string, string?][] };
 export type TextBlock = { title: string; lines: string[] };
 
 export type Dialect = {

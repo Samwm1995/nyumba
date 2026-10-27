@@ -2,11 +2,11 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/content/types";
 
-type Card = { en: string; ch: string; yes?: string; no?: string; reply?: string; audio?: string };
+type Card = { en: string; sw?: string; ch: string; yes?: string; no?: string; reply?: string; audio?: string };
 
 function toCards(l: Lesson): Card[] {
-  const a: Card[] = (l.items ?? []).map((i) => ({ en: i.en, ch: i.ch, reply: i.reply, audio: i.audio }));
-  const b: Card[] = (l.drills ?? []).map((d) => ({ en: d.en, ch: d.q, yes: d.yes, no: d.no, audio: d.audio }));
+  const a: Card[] = (l.items ?? []).map((i) => ({ en: i.en, sw: i.sw, ch: i.ch, reply: i.reply, audio: i.audio }));
+  const b: Card[] = (l.drills ?? []).map((d) => ({ en: d.en, sw: d.sw, ch: d.q, yes: d.yes, no: d.no, audio: d.audio }));
   return [...a, ...b];
 }
 
@@ -47,8 +47,9 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
         <ol className="space-y-2">
           {cards.map((c, idx) => (
             <li key={idx} className={`card p-4 ${known.has(idx) ? "border-amber/60" : ""}`}>
-              <p className="text-sm text-foreground/60">{c.en}</p>
               <p className="ch text-xl">{c.ch}</p>
+              {c.sw && <p className="text-base font-semibold text-navy/80">{c.sw}</p>}
+              <p className="text-sm text-foreground/60">{c.en}</p>
               {c.reply && <p className="mt-1 text-sm text-foreground/80">↳ {c.reply}</p>}
               {c.yes && (
                 <div className="mt-2 grid gap-1 text-sm sm:grid-cols-2">
@@ -73,8 +74,9 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
           >
             {!flipped ? (
               <>
-                <p className="text-sm uppercase tracking-wider text-foreground/50">English</p>
-                <p className="mt-2 text-2xl font-semibold text-navy">{c.en}</p>
+                <p className="text-sm uppercase tracking-wider text-foreground/50">Kiswahili · English</p>
+                <p className="mt-2 text-2xl font-semibold text-navy">{c.sw ?? c.en}</p>
+                {c.sw && <p className="mt-1 text-base text-foreground/60">{c.en}</p>}
                 <p className="mt-6 text-sm text-foreground/50">Tap to reveal</p>
               </>
             ) : (

@@ -11,20 +11,21 @@ export default function Home() {
       <section className="grid items-center gap-8 md:grid-cols-[1fr_1.2fr]">
         <Image src="/crest.png" alt="Nyumba ya Wachagga crest" width={520} height={520} priority className="mx-auto w-64 md:w-full" />
         <div>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber">Vijana wa Kichagga</p>
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber">Vijana wa Kichagga · Kivunjo</p>
           <h1 className="font-display mt-2 text-4xl font-black leading-tight text-navy md:text-5xl">
-            Nyumba ya Wachagga
+            Jifunze Kivunjo
           </h1>
+          <p className="mt-2 text-lg font-semibold text-navy/80">Lugha ya Marangu · Kilema · Mamba · Mwika · Kirua Vunjo</p>
           <p className="mt-4 text-lg text-foreground/80">
-            Learn Kichagga in <strong>your</strong> dialect, compare it with the others, and keep our customs, food, songs and
-            clan stories alive — recorded by elders, written down by the new generation.
+            Salamu, maswali na majibu, namba na mazungumzo — {phraseCount} misemo ya Kivunjo kutoka kwa wazee wetu, tayari kujifunza kwenye simu yako.
+            Learn the Vunjo dialect lesson by lesson, with flashcards that remember your progress.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/jifunze/vunjo" className="btn-primary">Start with Kivunjo</Link>
-            <Link href="/changia" className="btn-amber">Add your voice</Link>
+            <Link href="/jifunze/vunjo/salamu" className="btn-primary">Anza somo la 1 · Salamu</Link>
+            <Link href="/jifunze/vunjo" className="btn-secondary">Masomo yote</Link>
           </div>
           <p className="mt-4 text-sm text-foreground/60">
-            {phraseCount} Vunjo phrases and drills ready · {dialects.length - 1} dialects collecting speakers
+            Kimachame, Kikibosho na Kirombo zinakuja — tunatafuta wazungumzaji. <Link href="/changia" className="underline">Changia sauti yako</Link>.
           </p>
         </div>
       </section>

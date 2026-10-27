@@ -89,9 +89,10 @@ export default async function DialectPage({ params }: { params: Promise<{ dialec
               <details key={c.title} className="card p-4">
                 <summary className="cursor-pointer font-semibold text-navy">{c.title}</summary>
                 <ol className="mt-3 space-y-3">
-                  {c.lines.map(([ch, en], i) => (
+                  {c.lines.map(([ch, en, sw], i) => (
                     <li key={i} className={`rounded-xl p-3 ${i % 2 ? "bg-ivory" : "bg-silver/30"}`}>
                       <p className="ch">{ch}</p>
+                      {sw && <p className="text-sm font-semibold text-navy/80">{sw}</p>}
                       <p className="text-sm text-foreground/70">{en}</p>
                     </li>
                   ))}
