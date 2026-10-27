@@ -1,18 +1,46 @@
 "use client";
 import { useState } from "react";
 import { dialects } from "@/content/dialects";
-import { payment } from "@/content/support";
+import Link from "next/link";
+import { sendMagicLink, useAuth } from "@/lib/auth";
 import { Bi, useLang } from "./lang";
 
-// Registration has two paths. Until the Google Form backend is wired, both paths hand over to
-// WhatsApp with a structured message so nothing is lost; the sheet is filled by the team.
+// Registration has two paths. Both create an account (magic link by email); the DB trigger
+// copies the details into the profile, opens a pending membership and (visitors) a trip lead.
 type Path = "chagga" | "visitor" | null;
 
-const wa = (text: string) => `https://wa.me/${payment.whatsapp}?text=${encodeURIComponent(text)}`;
+function useRegister() {
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [err, setErr] = useState("");
+  const [email, setEmail] = useState("");
+  const register = async (em: string, meta: Record<string, string | boolean>) => {
+    setState("sending"); setEmail(em);
+    try { await sendMagicLink(em, meta, "/akaunti"); setState("sent"); }
+    catch (ex) { setErr(ex instanceof Error ? ex.message : "Error"); setState("error"); }
+  };
+  return { state, err, email, register };
+}
+
+function Sent({ email, sw, en }: { email: string; sw: string; en: string }) {
+  return (
+    <div className="card mt-4 border-amber/60 bg-amber/10 p-6">
+      <p className="font-display text-xl font-bold text-navy"><Bi sw="Karibu Nyumbani!" en="Welcome home!" /></p>
+      <p className="mt-2 text-foreground/80"><Bi sw={<>Tumetuma kiungo cha kuingia kwa <b>{email}</b>. Bonyeza kiungo hicho ili kufungua akaunti yako. {sw}</>} en={<>We sent a sign-in link to <b>{email}</b>. Open it to activate your account. {en}</>} /></p>
+    </div>
+  );
+}
 
 export function JoinForm() {
   const [path, setPath] = useState<Path>(null);
   const { setLang } = useLang();
+  const { session } = useAuth();
+
+  if (session) return (
+    <div className="card mt-4 p-5">
+      <p className="font-semibold text-navy"><Bi sw="Umeshaingia." en="You're signed in." /></p>
+      <Link href="/akaunti" className="btn-primary mt-3 inline-block"><Bi sw="Nenda kwenye akaunti yangu →" en="Go to my account →" /></Link>
+    </div>
+  );
 
   if (!path) {
     return (
@@ -46,50 +74,53 @@ function Field({ label, name, type = "text", required, placeholder }: { label: R
 }
 
 function ChaggaForm({ back }: { back: () => void }) {
+  const { state, err, email, register } = useRegister();
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
-    const msg = `USAJILI — Nyumba ya Wachagga\nJina: ${d.name}\nLahaja: ${d.dialect}\nEneo: ${d.area}\nWhatsApp: ${d.phone}\nEmail: ${d.email || "-"}\nNaweza kurekodi wazee: ${d.can_record ? "Ndiyo" : "Hapana"}\nUanachama: ${d.tier}\nMengine: ${d.note || "-"}`;
-    window.open(wa(msg), "_blank");
+    register(d.email.trim(), { name: d.name, phone: d.phone, dialect: d.dialect, area: d.area ?? "", audience: "chagga", tier: d.tier, can_record: !!d.can_record, note: d.note ?? "" });
   };
+  if (state === "sent") return <Sent email={email} sw="Ukichagua uanachama wa kulipia, maelekezo ya Lipa Namba yako kwenye akaunti yako." en="If you chose a paid tier, Lipa Namba instructions are in your account." />;
   return (
     <form onSubmit={submit} className="card mt-4 space-y-4 p-5">
       <button type="button" onClick={back} className="text-sm underline">← <Bi sw="Rudi" en="Back" /></button>
       <Field label={<Bi sw="Jina kamili" en="Full name" />} name="name" required />
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="WhatsApp" name="phone" required placeholder="07xx xxx xxx" />
-        <Field label={<Bi sw="Email (si lazima)" en="Email (optional)" />} name="email" type="email" />
+        <Field label="Email" name="email" type="email" required />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block"><span className="text-sm font-semibold text-navy"><Bi sw="Lahaja yako" en="Your dialect" /></span>
           <select name="dialect" className="mt-1 w-full rounded-xl border border-silver p-3">
-            {dialects.map((d) => <option key={d.slug} value={d.name}>{d.name}</option>)}
-            <option value="najifunza">Najifunza / sina uhakika</option>
+            {dialects.map((d) => <option key={d.slug} value={d.slug}>{d.name}</option>)}
+            <option value="other">Najifunza / sina uhakika</option>
           </select></label>
         <Field label={<Bi sw="Eneo la nyumbani" en="Home area" />} name="area" placeholder="mf. Kibosho Kati" />
       </div>
       <label className="block"><span className="text-sm font-semibold text-navy"><Bi sw="Uanachama" en="Membership" /></span>
         <select name="tier" className="mt-1 w-full rounded-xl border border-silver p-3">
-          <option value="Bure">Bure — nataka tu taarifa</option>
-          <option value="Meku 10,000">Meku — TZS 10,000 / mwaka</option>
-          <option value="Mangi 50,000">Mangi — TZS 50,000 / mwaka</option>
-          <option value="Chifu 250,000">Chifu — TZS 250,000 / mwaka</option>
+          <option value="">Bure — nataka tu taarifa</option>
+          <option value="meku">Meku — TZS 10,000 / mwaka</option>
+          <option value="mangi">Mangi — TZS 50,000 / mwaka</option>
+          <option value="chifu">Chifu — TZS 250,000 / mwaka</option>
         </select></label>
       <label className="flex items-center gap-3 rounded-xl border border-silver p-3"><input type="checkbox" name="can_record" className="h-5 w-5" /><span><Bi sw="Naweza kurekodi wazee eneo langu" en="I can record elders in my area" /></span></label>
       <label className="block"><span className="text-sm font-semibold text-navy"><Bi sw="Mengine" en="Anything else" /></span><textarea name="note" rows={2} className="mt-1 w-full rounded-xl border border-silver p-3" /></label>
-      <button className="btn-primary w-full"><Bi sw="Jiunge (inafungua WhatsApp)" en="Join (opens WhatsApp)" /></button>
-      <p className="text-xs text-foreground/60"><Bi sw="Ukichagua uanachama wa kulipia, utapewa maelekezo ya Lipa Namba baada ya kujiandikisha." en="If you choose a paid tier you'll get Lipa Namba instructions after registering." /></p>
+      <button className="btn-primary w-full" disabled={state === "sending"}>{state === "sending" ? "…" : <Bi sw="Jiunge" en="Join" />}</button>
+      {state === "error" && <p className="text-sm text-cherry">{err}</p>}
+      <p className="text-xs text-foreground/60"><Bi sw="Tunakutumia kiungo cha kuingia kwa email — hakuna nenosiri. Ukichagua uanachama wa kulipia, maelekezo ya Lipa Namba yanakuja baada ya kuingia." en="We email you a sign-in link — no password. If you choose a paid tier, Lipa Namba instructions appear after you sign in." /></p>
     </form>
   );
 }
 
 function VisitorForm({ back }: { back: () => void }) {
+  const { state, err, email, register } = useRegister();
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
-    const msg = `KILIMANJARO FRIEND — registration\nName: ${d.name}\nCountry: ${d.country}\nEmail: ${d.email}\nWhatsApp: ${d.phone || "-"}\nClimb / visit date: ${d.date || "-"}\nTour operator: ${d.operator || "-"}\nPackage: ${d.tier}\nInterested in: ${d.extras || "-"}`;
-    window.open(wa(msg), "_blank");
+    register(d.email.trim(), { name: d.name, phone: d.phone ?? "", country: d.country, audience: "visitor", tier: d.tier, travel_date: d.date ?? "", operator: d.operator ?? "", extras: d.extras ?? "" });
   };
+  if (state === "sent") return <Sent email={email} sw="" en="Your free greetings sheet is in the Learn section; paid packs unlock in your account once payment is confirmed." />;
   return (
     <form onSubmit={submit} className="card mt-4 space-y-4 p-5">
       <button type="button" onClick={back} className="text-sm underline">← Back</button>
@@ -106,9 +137,9 @@ function VisitorForm({ back }: { back: () => void }) {
       <Field label="Tour operator (if booked)" name="operator" />
       <label className="block"><span className="text-sm font-semibold text-navy">Package</span>
         <select name="tier" className="mt-1 w-full rounded-xl border border-silver p-3">
-          <option value="Free">Free — greetings sheet (PDF)</option>
-          <option value="Kilimanjaro Friend $10">Kilimanjaro Friend — $10: climbers&apos; phrase pack, audio, certificate</option>
-          <option value="Kilimanjaro Friend+ $25">Kilimanjaro Friend+ — $25: plus a personal greeting video from a Chagga elder in your guides&apos; dialect</option>
+          <option value="">Free — online greetings sheet</option>
+          <option value="friend">Kilimanjaro Friend — $10: climbers&apos; phrase pack, audio, certificate (online)</option>
+          <option value="friend_plus">Kilimanjaro Friend+ — $25: plus a personal greeting video from a Chagga elder in your guides&apos; dialect</option>
         </select></label>
       <label className="block"><span className="text-sm font-semibold text-navy">Also interested in</span>
         <select name="extras" className="mt-1 w-full rounded-xl border border-silver p-3">
@@ -118,7 +149,8 @@ function VisitorForm({ back }: { back: () => void }) {
           <option>Airport transfer (JRO)</option>
           <option>Zanzibar after the climb</option>
         </select></label>
-      <button className="btn-primary w-full">Register (opens WhatsApp)</button>
+      <button className="btn-primary w-full" disabled={state === "sending"}>{state === "sending" ? "…" : "Register"}</button>
+      {state === "error" && <p className="text-sm text-cherry">{err}</p>}
       <p className="text-xs text-foreground/60">Card payment link and receipt are issued by Flightfront Limited, our travel partner. Trips are optional and quoted separately.</p>
     </form>
   );

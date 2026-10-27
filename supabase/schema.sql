@@ -21,7 +21,7 @@ create table profiles (
 create table user_roles (
   user_id uuid references profiles(id) on delete cascade,
   role app_role not null,
-  dialect text,                      -- for verifier: which dialect they may approve (null = all)
+  dialect text not null default '',  -- for verifier: which dialect they may approve ('' = all)
   granted_by uuid references profiles(id),
   granted_at timestamptz not null default now(),
   primary key (user_id, role, dialect)
@@ -30,7 +30,7 @@ create table user_roles (
 create or replace function has_role(r app_role, d text default null) returns boolean language sql stable as $$
   select exists (
     select 1 from user_roles ur
-    where ur.user_id = auth.uid() and ur.role = r and (ur.dialect is null or d is null or ur.dialect = d)
+    where ur.user_id = auth.uid() and ur.role = r and (ur.dialect = '' or d is null or ur.dialect = d)
   ) or exists (select 1 from user_roles where user_id = auth.uid() and role = 'admin');
 $$;
 
@@ -199,16 +199,31 @@ create policy "create lead" on leads for insert with check (true);
 create policy "admin audit" on audit_log for select using (has_role('admin'));
 
 -- ───────────────────────── Storage ─────────────────────────
--- Buckets (create in Storage UI): audio (private), members (private: premium PDFs/audio), logos (public)
--- Then:
--- create policy "contributor uploads audio" on storage.objects for insert with check (bucket_id = 'audio' and auth.uid() is not null);
--- create policy "verifiers read audio" on storage.objects for select using (bucket_id = 'audio' and (has_role('verifier') or has_role('editor')));
--- create policy "members read premium" on storage.objects for select using (bucket_id = 'members' and is_active_member());
--- create policy "public logos" on storage.objects for select using (bucket_id = 'logos');
+insert into storage.buckets (id, name, public) values ('audio','audio',false), ('members','members',false), ('logos','logos',true)
+on conflict (id) do nothing;
+create policy "contributor uploads audio" on storage.objects for insert with check (bucket_id = 'audio' and auth.uid() is not null);
+create policy "verifiers read audio" on storage.objects for select using (bucket_id = 'audio' and (has_role('verifier') or has_role('editor')));
+create policy "members read premium" on storage.objects for select using (bucket_id = 'members' and is_active_member());
+create policy "staff manage premium" on storage.objects for all using (bucket_id = 'members' and has_role('editor')) with check (bucket_id = 'members' and has_role('editor'));
+create policy "public logos" on storage.objects for select using (bucket_id = 'logos');
+create policy "finance uploads logos" on storage.objects for insert with check (bucket_id = 'logos' and has_role('finance'));
 
--- ───────────────────────── Bootstrap ─────────────────────────
--- After your first login, make yourself admin (replace the email):
--- insert into user_roles (user_id, role) select id, 'admin' from auth.users where email = 'smakundi91@gmail.com';
--- insert into user_roles (user_id, role) select id, 'finance' from auth.users where email = 'smakundi91@gmail.com';
--- insert into user_roles (user_id, role) select id, 'editor' from auth.users where email = 'smakundi91@gmail.com';
--- insert into user_roles (user_id, role) select id, 'partner' from auth.users where email = 'smakundi91@gmail.com';
+-- auto-create profile on signup
+create or replace function handle_new_user() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  insert into profiles (id, name, phone, dialect, area, audience, country)
+  values (new.id,
+    coalesce(new.raw_user_meta_data->>'name',''),
+    new.raw_user_meta_data->>'phone',
+    new.raw_user_meta_data->>'dialect',
+    new.raw_user_meta_data->>'area',
+    coalesce(new.raw_user_meta_data->>'audience','chagga'),
+    new.raw_user_meta_data->>'country')
+  on conflict (id) do nothing;
+  -- bootstrap admin
+  if new.email = 'smakundi91@gmail.com' then
+    insert into user_roles (user_id, role) values (new.id,'admin'),(new.id,'finance'),(new.id,'editor'),(new.id,'partner') on conflict do nothing;
+  end if;
+  return new;
+end $$;
+create trigger on_auth_user_created after insert on auth.users for each row execute function handle_new_user();

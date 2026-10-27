@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { dialects } from "@/content/dialects";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth";
+import { SignIn } from "./sign-in";
+import { Bi } from "./lang";
 
 const kinds = [
   ["phrase", "Word or phrase"],
@@ -23,6 +26,7 @@ export function ContributeForm() {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [err, setErr] = useState("");
   const timer = useRef<number | null>(null);
+  const { session, loading } = useAuth();
 
   useEffect(() => () => { if (timer.current) window.clearInterval(timer.current); }, []);
 
@@ -75,10 +79,9 @@ export function ContributeForm() {
         audio_path = path;
       }
       const { error } = await sb.from("contributions").insert({
+        contributor: session!.user.id,
         kind: row.kind, dialect: row.dialect, chagga: row.chagga, swahili: row.swahili || null, english: row.english || null,
-        context: row.context || null, topic: row.topic || null, contributor_name: row.contributor_name,
-        contributor_area: row.contributor_area || null, contributor_contact: row.contributor_contact || null,
-        speaker_name: row.speaker_name || null, audio_path,
+        context: row.context || null, topic: row.topic || null, speaker_name: row.speaker_name || null, audio_path,
       });
       if (error) throw error;
       setState("done");
@@ -87,6 +90,14 @@ export function ContributeForm() {
       setState("error");
     }
   }
+
+  if (loading) return <p className="mt-6 text-foreground/60">…</p>;
+  if (!session) return (
+    <div className="mt-6 max-w-md">
+      <p className="text-foreground/80"><Bi sw="Ingia kwanza ili mchango wako uhifadhiwe kwa jina lako na upate taarifa ukithibitishwa." en="Sign in first so your contribution is credited to you and you hear back when it's verified." /></p>
+      <div className="mt-3"><SignIn next="/changia" compact /></div>
+    </div>
+  );
 
   if (state === "done") {
     return (
@@ -144,12 +155,7 @@ export function ContributeForm() {
         <textarea name="context" rows={2} className="mt-1 w-full rounded-xl border border-silver p-3" />
       </label>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block"><span className="text-sm font-semibold text-navy">Your name</span><input name="contributor_name" required className="mt-1 w-full rounded-xl border border-silver p-3" /></label>
-        <label className="block"><span className="text-sm font-semibold text-navy">Your home area (e.g. Marangu Mamba)</span><input name="contributor_area" className="mt-1 w-full rounded-xl border border-silver p-3" /></label>
-        <label className="block"><span className="text-sm font-semibold text-navy">Speaker&apos;s name, if not you (e.g. Bibi Anna Lyimo)</span><input name="speaker_name" className="mt-1 w-full rounded-xl border border-silver p-3" /></label>
-        <label className="block"><span className="text-sm font-semibold text-navy">WhatsApp or email (private, for questions)</span><input name="contributor_contact" className="mt-1 w-full rounded-xl border border-silver p-3" /></label>
-      </div>
+      <label className="block"><span className="text-sm font-semibold text-navy">Speaker&apos;s name, if not you (e.g. Bibi Anna Lyimo)</span><input name="speaker_name" className="mt-1 w-full rounded-xl border border-silver p-3" /></label>
 
       {err && <p className="rounded-xl bg-cherry/10 p-3 text-sm text-cherry">{err}</p>}
       <button className="btn-primary w-full" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Submit for verification"}</button>

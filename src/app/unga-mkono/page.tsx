@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { payment, tiers } from "@/content/support";
 import { Bi } from "@/components/lang";
 
@@ -14,8 +15,8 @@ export default function Support() {
         <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber">Unga mkono</p>
         <h1 className="font-display mt-1 text-3xl font-black text-navy"><Bi sw="Kuwa Mwanachama wa Nyumba" en="Become a member of the House" /></h1>
         <p className="mt-3 text-lg text-foreground/80">
-          <Bi sw="Michango yako inalipia siku za kurekodi wazee, uhifadhi wa sauti, uchapishaji wa vitabu vya misemo na kuendesha tovuti hii. Kila shilingi inahesabiwa kwenye ukurasa wa Uwazi."
-              en="Your contribution pays for recording days with elders, audio archiving, printed phrasebooks and running this site. Every shilling is accounted for on the Transparency page." />
+          <Bi sw="Michango yako inalipia siku za kurekodi wazee, uhifadhi wa sauti, matoleo ya kidijitali ya vitabu vya misemo na kuendesha tovuti hii. Kila shilingi inahesabiwa kwenye ukurasa wa Uwazi."
+              en="Your contribution pays for recording days with elders, audio archiving, digital phrasebook editions and running this site. Every shilling is accounted for on the Transparency page." />
         </p>
       </div>
 
@@ -27,7 +28,7 @@ export default function Support() {
             <ul className="mt-4 flex-1 space-y-2 text-sm text-foreground/80">
               {t.perks.map((p) => <li key={p} className="flex gap-2"><span className="text-amber">✓</span>{p}</li>)}
             </ul>
-            <a href="#lipa" className={`mt-5 ${t.featured ? "btn-amber" : "btn-primary"}`}>Chagua {t.name}</a>
+            <Link href="/akaunti" className={`mt-5 ${t.featured ? "btn-amber" : "btn-primary"}`}>Chagua {t.name}</Link>
           </div>
         ))}
       </div>
@@ -40,7 +41,7 @@ export default function Support() {
             <li><b>1.</b> <Bi sw="Fungua M-Pesa, Tigo Pesa, Airtel Money, HaloPesa au app ya benki yako." en="Open M-Pesa, Tigo Pesa, Airtel Money, HaloPesa or your bank app (visitors: card link via WhatsApp)." /></li>
             <li><b>2.</b> <Bi sw={<>Chagua <b>Lipa kwa simu / Lipa Namba</b> na weka</>} en={<>Choose <b>Lipa Namba</b> and enter</>} /> <span className="ch text-xl">{payment.lipaNamba}</span> ({payment.accountName}) — <Bi sw={<>au <b>scan TanQR</b> hii.</>} en={<>or <b>scan this TanQR</b>.</>} /></li>
             <li><b>3.</b> <Bi sw="Weka kiasi: Meku 10,000 · Mangi 50,000 · Chifu 250,000 (au kiasi chochote cha mchango)." en="Amount: Meku 10,000 · Mangi 50,000 · Chifu 250,000 (or any donation)." /></li>
-            <li><b>4.</b> <Bi sw="Tuma ujumbe wa uthibitisho na jina lako kwa WhatsApp ili tukuandikishe." en="Send the confirmation message and your name on WhatsApp so we can register you." /></li>
+            <li><b>4.</b> <Bi sw={<><Link href="/akaunti" className="underline">Ingia kwenye akaunti yako</Link>, bonyeza “Nimelipa” na tuma ujumbe wa uthibitisho — timu ya fedha inawasha uanachama wako.</>} en={<><Link href="/akaunti" className="underline">Sign in to your account</Link>, press “I've paid” and send the confirmation — finance activates your membership.</>} /></li>
           </ol>
           <div className="mt-4 flex flex-wrap gap-2">
             <a className="btn-amber" href={wa("Habari Nyumba ya Wachagga! Nimelipa uanachama wa [Meku/Mangi/Chifu]. Jina langu: ____. Lahaja: ____. Ujumbe wa malipo: ____")} target="_blank" rel="noreferrer">Nimelipa — nitumie uthibitisho</a>
