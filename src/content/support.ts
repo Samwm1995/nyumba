@@ -8,13 +8,13 @@ export const payment = {
 };
 
 export const tiers = [
-  { key: "meku", name: "Meku", sw: "Meku · Mzee wa Nyumba", price: 10000, period: "kwa mwaka", perks: ["Jina lako kwenye Ukuta wa Wameku", "Taarifa za masomo na matukio mapya kwanza", "Kadi ya uanachama (PDF)"] },
-  { key: "mangi", name: "Mangi", sw: "Mangi · Mlezi wa Lahaja", price: 50000, period: "kwa mwaka", perks: ["Yote ya Meku", "Kitabu cha misemo kilichochapishwa (A5)", "Shukrani kwenye ukurasa wa lahaja unayoichagua", "Mwaliko wa Siku ya Kurekodi"], featured: true },
-  { key: "chifu", name: "Chifu", sw: "Chifu · Mkuu wa Baraza", price: 250000, period: "kwa mwaka", perks: ["Yote ya Mangi", "Jina/nembo kwenye ukurasa wa mbele", "Nakala 5 za kitabu kwa shule au kanisa unalochagua", "Kiti cha ushauri kwenye Baraza la Nyumba"] },
+  { key: "meku", name: "Meku", sw: "Meku · Mzee wa Nyumba", price: 10000, period: "kwa mwaka", perks: ["Jina lako kwenye Ukuta wa Wameku", "Taarifa za masomo na matukio mapya kwanza", "Kadi ya uanachama ya kidijitali", "Kitabu cha misemo (PDF) toleo la wanachama"] },
+  { key: "mangi", name: "Mangi", sw: "Mangi · Mlezi wa Lahaja", price: 50000, period: "kwa mwaka", perks: ["Yote ya Meku", "Kitabu cha misemo chenye sauti (PDF + audio)", "Shukrani kwenye ukurasa wa lahaja unayoichagua", "Mwaliko wa Siku ya Kurekodi (ana kwa ana au mtandaoni)"], featured: true },
+  { key: "chifu", name: "Chifu", sw: "Chifu · Mkuu wa Baraza", price: 250000, period: "kwa mwaka", perks: ["Yote ya Mangi", "Jina/nembo kwenye ukurasa wa mbele", "Leseni ya kitabu cha misemo kwa shule au kanisa unalochagua (nakala za kidijitali bila kikomo)", "Kiti cha ushauri kwenye Baraza la Nyumba"] },
 ];
 
 export const sponsorPackages = [
-  { name: "Mdhamini wa Lahaja · Dialect Sponsor", price: "TZS 2,000,000 / mwaka", perks: ["“Masomo ya Kimachame yanaletwa kwako na ___” kwenye kila somo la lahaja hiyo", "Nembo kwenye kitabu cha misemo cha lahaja hiyo", "Machapisho 4 kwenye WhatsApp Channel na mitandao", "Ripoti ya robo mwaka: wanafunzi, misemo, rekodi"] },
+  { name: "Mdhamini wa Lahaja · Dialect Sponsor", price: "TZS 2,000,000 / mwaka", perks: ["“Masomo ya Kimachame yanaletwa kwako na ___” kwenye kila somo la lahaja hiyo", "Nembo kwenye kitabu cha misemo (PDF) cha lahaja hiyo", "Machapisho 4 kwenye WhatsApp Channel na mitandao", "Ripoti ya robo mwaka: wanafunzi, misemo, rekodi"] },
   { name: "Mdhamini wa Sehemu · Section Sponsor", price: "TZS 1,000,000 / mwaka", perks: ["Nembo kwenye sehemu moja: Utamaduni, Vivutio au Jumuiya", "Machapisho 2 kwa mwaka", "Shukrani kwenye ukurasa wa Wadhamini"] },
   { name: "Mdhamini wa Tukio · Event Sponsor", price: "kuanzia TZS 500,000", perks: ["Bango na nembo kwenye Siku ya Kurekodi au jioni ya utamaduni", "Kutajwa kwenye matangazo yote ya tukio", "Nafasi ya kuongea / meza ya bidhaa"] },
 ];

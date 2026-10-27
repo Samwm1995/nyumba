@@ -108,7 +108,7 @@ function VisitorForm({ back }: { back: () => void }) {
         <select name="tier" className="mt-1 w-full rounded-xl border border-silver p-3">
           <option value="Free">Free — greetings sheet (PDF)</option>
           <option value="Kilimanjaro Friend $10">Kilimanjaro Friend — $10: climbers&apos; phrase pack, audio, certificate</option>
-          <option value="Kilimanjaro Friend+ $25">Kilimanjaro Friend+ — $25: plus printed phrasebook delivered to your hotel in Moshi</option>
+          <option value="Kilimanjaro Friend+ $25">Kilimanjaro Friend+ — $25: plus a personal greeting video from a Chagga elder in your guides&apos; dialect</option>
         </select></label>
       <label className="block"><span className="text-sm font-semibold text-navy">Also interested in</span>
         <select name="extras" className="mt-1 w-full rounded-xl border border-silver p-3">
