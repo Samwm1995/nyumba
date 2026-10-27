@@ -11,6 +11,7 @@ const links = [
   { href: "/vivutio", label: "Vivutio", en: "Visit" },
   { href: "/changia", label: "Changia", en: "Contribute" },
   { href: "/jumuiya", label: "Jumuiya", en: "Community" },
+  { href: "/wadhamini", label: "Wadhamini", en: "Sponsors" },
   { href: "/unga-mkono", label: "Unga mkono", en: "Support" },
 ];
 
