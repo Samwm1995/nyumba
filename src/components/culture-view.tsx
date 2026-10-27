@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useLang, Bi } from "./lang";
 import { articles, pillars } from "@/content/culture";
 import { articlesSw, pillarsSw } from "@/content/culture-sw";
+import { articleImage } from "@/content/images";
+import { Photo } from "./photo";
 
 export function CultureIndex() {
   const { lang } = useLang();
@@ -25,9 +27,12 @@ export function CultureIndex() {
               {list.map((a) => {
                 const sw = articlesSw[a.slug];
                 return (
-                  <Link key={a.slug} href={`/utamaduni/${a.slug}`} className="card p-5 hover:border-navy/40">
-                    <h3 className="font-display font-bold text-navy">{lang === "en" || !sw ? a.title : sw.title}</h3>
-                    <p className="mt-1 text-sm text-foreground/75">{lang === "en" || !sw ? a.summary : sw.summary}</p>
+                  <Link key={a.slug} href={`/utamaduni/${a.slug}`} className="card flex overflow-hidden hover:border-navy/40">
+                    {articleImage[a.slug] && <Photo k={articleImage[a.slug]} ratio="aspect-square w-28 shrink-0 sm:w-36" sizes="150px" className="!rounded-none" />}
+                    <div className="p-4">
+                      <h3 className="font-display font-bold text-navy">{lang === "en" || !sw ? a.title : sw.title}</h3>
+                      <p className="mt-1 text-sm text-foreground/75">{lang === "en" || !sw ? a.summary : sw.summary}</p>
+                    </div>
                   </Link>
                 );
               })}
@@ -51,6 +56,7 @@ export function CultureArticle({ slug }: { slug: string }) {
       <p className="text-sm text-foreground/60"><Link href="/utamaduni" className="underline">Utamaduni</Link> / {lang === "en" ? pillar.name : pillar.sw}</p>
       <h1 className="font-display mt-1 text-3xl font-black text-navy">{useSw ? sw.title : a.title}</h1>
       <p className="mt-2 text-lg text-foreground/80">{useSw ? sw.summary : a.summary}</p>
+      {articleImage[slug] && <Photo k={articleImage[slug]} ratio="aspect-[16/9]" sizes="(min-width: 768px) 672px, 100vw" className="mt-5" />}
       <div className="mt-6 space-y-4 text-lg leading-relaxed">{(useSw ? sw.body : a.body).map((p, i) => <p key={i}>{p}</p>)}</div>
       {a.source && <p className="mt-6 text-sm text-foreground/60"><Bi sw="Chanzo" en="Source" />: {a.source}</p>}
       <div className="card mt-8 bg-ivory p-4">

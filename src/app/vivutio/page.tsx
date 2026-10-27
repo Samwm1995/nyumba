@@ -1,5 +1,7 @@
 import { attractions, payment } from "@/content/support";
 import { Bi } from "@/components/lang";
+import { Photo } from "@/components/photo";
+import { attractionImage } from "@/content/images";
 
 export const metadata = { title: "Vivutio · Chagga attractions" };
 
@@ -19,7 +21,9 @@ export default function Attractions() {
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {attractions.map((a) => (
-          <article key={a.slug} className="card flex flex-col p-5">
+          <article key={a.slug} className="card flex flex-col overflow-hidden">
+            {attractionImage[a.slug] && <Photo k={attractionImage[a.slug]} ratio="aspect-[16/9]" className="!rounded-none" />}
+            <div className="flex flex-1 flex-col p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h2 className="font-display text-lg font-bold text-navy">{a.name}</h2>
@@ -31,6 +35,7 @@ export default function Attractions() {
               {a.tags.map((t) => <span key={t} className="rounded-full bg-ivory px-2 py-0.5 text-xs text-coffee">{t}</span>)}
             </div>
             <a href={book(a.name)} target="_blank" rel="noreferrer" className="btn-primary mt-4"><Bi sw="Panga safari na Flightfront" en="Book with Flightfront" /></a>
+            </div>
           </article>
         ))}
       </div>

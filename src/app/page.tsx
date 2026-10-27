@@ -3,14 +3,30 @@ import Image from "next/image";
 import { dialects } from "@/content/dialects";
 import { pillars } from "@/content/culture";
 import { Bi } from "@/components/lang";
+import { Photo } from "@/components/photo";
+import type { ImgKey } from "@/content/images";
+
+const pillarPhoto: Record<string, ImgKey> = { mila: "chaggaDecember", historia: "marealle", chakula: "mbege", nyimbo: "mbegeSeller", ukoo: "marangu" };
 
 export default function Home() {
   const vunjo = dialects.find((d) => d.slug === "vunjo")!;
   const phraseCount = vunjo.lessons.reduce((n, l) => n + (l.items?.length ?? 0) + (l.drills?.length ?? 0), 0);
   return (
     <div className="space-y-12">
+      <section className="relative overflow-hidden rounded-3xl bg-navy text-ivory">
+        <Photo k="hero" hero priority ratio="aspect-[16/10] sm:aspect-[21/9] md:aspect-[5/2]" sizes="100vw" className="rounded-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 flex items-end gap-4 p-5 md:p-8">
+          <Image src="/crest.png" alt="" width={120} height={120} priority className="hidden w-20 shrink-0 sm:block md:w-28" />
+          <div>
+            <p className="font-display text-xs font-semibold uppercase tracking-[0.3em] text-amber md:text-sm">Vijana wa Kichagga · Kilimanjaro ni Kwetu</p>
+            <h1 className="font-display mt-1 text-3xl font-black leading-tight md:text-5xl"><Bi sw="Jifunze Kichagga. Jue Uchagga." en="Learn Chagga. Know Chagga land." /></h1>
+          </div>
+        </div>
+      </section>
+
       <section className="grid items-center gap-8 md:grid-cols-[1fr_1.2fr]">
-        <Image src="/crest.png" alt="Nyumba ya Wachagga crest" width={520} height={520} priority className="mx-auto w-64 md:w-full" />
+        <Photo k="kibo" ratio="aspect-[4/3]" />
         <div>
           <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber">Vijana wa Kichagga · Kivunjo</p>
           <h1 className="font-display mt-2 text-4xl font-black leading-tight text-navy md:text-5xl">
@@ -54,9 +70,12 @@ export default function Home() {
         <h2 className="font-display text-2xl font-bold text-navy"><Bi sw="Utamaduni" en="Culture" /></h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {pillars.map((p) => (
-            <Link key={p.key} href={`/utamaduni#${p.key}`} className="card p-5 hover:border-navy/40">
+            <Link key={p.key} href={`/utamaduni#${p.key}`} className="card overflow-hidden hover:border-navy/40">
+              <Photo k={pillarPhoto[p.key] ?? "mbege"} ratio="aspect-[3/2]" sizes="(min-width: 1024px) 20vw, 50vw" className="!rounded-none" />
+              <div className="p-4">
               <h3 className="font-display font-bold text-navy">{p.sw}</h3>
               <p className="mt-1 text-sm text-foreground/70">{p.blurb}</p>
+              </div>
             </Link>
           ))}
         </div>
