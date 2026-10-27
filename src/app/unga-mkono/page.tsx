@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { payment, tiers } from "@/content/support";
+import { Bi } from "@/components/lang";
 
 export const metadata = { title: "Unga mkono · Support & membership" };
 
@@ -11,10 +12,10 @@ export default function Support() {
     <div className="space-y-10">
       <div className="max-w-2xl">
         <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber">Unga mkono</p>
-        <h1 className="font-display mt-1 text-3xl font-black text-navy">Kuwa Mwanachama wa Nyumba</h1>
+        <h1 className="font-display mt-1 text-3xl font-black text-navy"><Bi sw="Kuwa Mwanachama wa Nyumba" en="Become a member of the House" /></h1>
         <p className="mt-3 text-lg text-foreground/80">
-          Michango yako inalipia siku za kurekodi wazee, uhifadhi wa sauti, uchapishaji wa vitabu vya misemo na kuendesha tovuti hii.
-          Kila shilingi inahesabiwa kwenye ukurasa wa Uwazi.
+          <Bi sw="Michango yako inalipia siku za kurekodi wazee, uhifadhi wa sauti, uchapishaji wa vitabu vya misemo na kuendesha tovuti hii. Kila shilingi inahesabiwa kwenye ukurasa wa Uwazi."
+              en="Your contribution pays for recording days with elders, audio archiving, printed phrasebooks and running this site. Every shilling is accounted for on the Transparency page." />
         </p>
       </div>
 
@@ -34,12 +35,12 @@ export default function Support() {
       <section id="lipa" className="card grid gap-6 p-6 md:grid-cols-[auto_1fr] md:p-8">
         <Image src={payment.qr} alt="TanQR ya kulipa" width={220} height={220} className="mx-auto rounded-xl border border-silver" />
         <div>
-          <h2 className="font-display text-2xl font-bold text-navy">Jinsi ya kulipa</h2>
+          <h2 className="font-display text-2xl font-bold text-navy"><Bi sw="Jinsi ya kulipa" en="How to pay" /></h2>
           <ol className="mt-3 space-y-2 text-foreground/80">
-            <li><b>1.</b> Fungua M-Pesa, Tigo Pesa, Airtel Money, HaloPesa au app ya benki yako.</li>
-            <li><b>2.</b> Chagua <b>Lipa kwa simu / Lipa Namba</b> na weka <span className="ch text-xl">{payment.lipaNamba}</span> ({payment.accountName}) — au <b>scan TanQR</b> hii.</li>
-            <li><b>3.</b> Weka kiasi: Rafiki 10,000 · Mlezi 50,000 · Mzee wa Baraza 250,000 (au kiasi chochote cha mchango).</li>
-            <li><b>4.</b> Tuma ujumbe wa uthibitisho na jina lako kwa WhatsApp ili tukuandikishe.</li>
+            <li><b>1.</b> <Bi sw="Fungua M-Pesa, Tigo Pesa, Airtel Money, HaloPesa au app ya benki yako." en="Open M-Pesa, Tigo Pesa, Airtel Money, HaloPesa or your bank app (visitors: card link via WhatsApp)." /></li>
+            <li><b>2.</b> <Bi sw={<>Chagua <b>Lipa kwa simu / Lipa Namba</b> na weka</>} en={<>Choose <b>Lipa Namba</b> and enter</>} /> <span className="ch text-xl">{payment.lipaNamba}</span> ({payment.accountName}) — <Bi sw={<>au <b>scan TanQR</b> hii.</>} en={<>or <b>scan this TanQR</b>.</>} /></li>
+            <li><b>3.</b> <Bi sw="Weka kiasi: Rafiki 10,000 · Mlezi 50,000 · Mzee wa Baraza 250,000 (au kiasi chochote cha mchango)." en="Amount: Rafiki 10,000 · Mlezi 50,000 · Mzee wa Baraza 250,000 (or any donation)." /></li>
+            <li><b>4.</b> <Bi sw="Tuma ujumbe wa uthibitisho na jina lako kwa WhatsApp ili tukuandikishe." en="Send the confirmation message and your name on WhatsApp so we can register you." /></li>
           </ol>
           <div className="mt-4 flex flex-wrap gap-2">
             <a className="btn-amber" href={wa("Habari Nyumba ya Wachagga! Nimelipa uanachama wa [Rafiki/Mlezi/Mzee]. Jina langu: ____. Lahaja: ____. Ujumbe wa malipo: ____")} target="_blank" rel="noreferrer">Nimelipa — nitumie uthibitisho</a>
@@ -50,8 +51,8 @@ export default function Support() {
       </section>
 
       <section className="card bg-navy p-6 text-ivory md:p-8">
-        <h2 className="font-display text-2xl font-bold">Ukuta wa Marafiki</h2>
-        <p className="mt-2 text-silver">Majina ya wanachama waliounga mkono yanaonekana hapa. Kuwa wa kwanza.</p>
+        <h2 className="font-display text-2xl font-bold"><Bi sw="Ukuta wa Marafiki" en="Wall of Friends" /></h2>
+        <p className="mt-2 text-silver"><Bi sw="Majina ya wanachama waliounga mkono yanaonekana hapa. Kuwa wa kwanza." en="Supporting members are named here. Be the first." /></p>
       </section>
     </div>
   );

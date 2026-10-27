@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/content/types";
+import { Bi, useLang } from "./lang";
 
 type Card = { en: string; sw?: string; ch: string; yes?: string; no?: string; reply?: string; audio?: string };
 
@@ -17,6 +18,7 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState<Set<number>>(new Set());
   const key = `nyumba:${dialect}:${lesson.slug}`;
+  const { lang } = useLang();
 
   useEffect(() => {
     try {
@@ -38,9 +40,9 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
-        <button className={mode === "list" ? "btn-primary" : "btn-secondary"} onClick={() => setMode("list")}>List</button>
-        <button className={mode === "cards" ? "btn-primary" : "btn-secondary"} onClick={() => setMode("cards")}>Flashcards</button>
-        <span className="ml-auto text-sm text-foreground/60">{known.size}/{cards.length} learned</span>
+        <button className={mode === "list" ? "btn-primary" : "btn-secondary"} onClick={() => setMode("list")}><Bi sw="Orodha" en="List" /></button>
+        <button className={mode === "cards" ? "btn-primary" : "btn-secondary"} onClick={() => setMode("cards")}><Bi sw="Kadi" en="Flashcards" /></button>
+        <span className="ml-auto text-sm text-foreground/60">{known.size}/{cards.length} <Bi sw="umejifunza" en="learned" /></span>
       </div>
 
       {mode === "list" ? (
@@ -48,8 +50,8 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
           {cards.map((c, idx) => (
             <li key={idx} className={`card p-4 ${known.has(idx) ? "border-amber/60" : ""}`}>
               <p className="ch text-xl">{c.ch}</p>
-              {c.sw && <p className="text-base font-semibold text-navy/80">{c.sw}</p>}
-              <p className="text-sm text-foreground/60">{c.en}</p>
+              {lang === "en" ? (<><p className="text-base font-semibold text-navy/80">{c.en}</p>{c.sw && <p className="text-sm text-foreground/60">{c.sw}</p>}</>)
+                : (<>{c.sw && <p className="text-base font-semibold text-navy/80">{c.sw}</p>}<p className="text-sm text-foreground/60">{c.en}</p></>)}
               {c.reply && <p className="mt-1 text-sm text-foreground/80">↳ {c.reply}</p>}
               {c.yes && (
                 <div className="mt-2 grid gap-1 text-sm sm:grid-cols-2">
@@ -60,7 +62,7 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
               {c.audio ? (
                 <audio controls preload="none" src={c.audio} className="mt-2 h-9 w-full" />
               ) : (
-                <p className="mt-2 text-xs text-foreground/50">No audio yet — speakers can add it under Changia.</p>
+                <p className="mt-2 text-xs text-foreground/50"><Bi sw="Bado hakuna sauti — wazungumzaji wanaweza kuiongeza kupitia Changia." en="No audio yet — speakers can add it under Changia." /></p>
               )}
             </li>
           ))}
@@ -74,10 +76,10 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
           >
             {!flipped ? (
               <>
-                <p className="text-sm uppercase tracking-wider text-foreground/50">Kiswahili · English</p>
-                <p className="mt-2 text-2xl font-semibold text-navy">{c.sw ?? c.en}</p>
-                {c.sw && <p className="mt-1 text-base text-foreground/60">{c.en}</p>}
-                <p className="mt-6 text-sm text-foreground/50">Tap to reveal</p>
+                <p className="text-sm uppercase tracking-wider text-foreground/50">{lang === "en" ? "English · Kiswahili" : "Kiswahili · English"}</p>
+                <p className="mt-2 text-2xl font-semibold text-navy">{lang === "en" ? c.en : (c.sw ?? c.en)}</p>
+                <p className="mt-1 text-base text-foreground/60">{lang === "en" ? c.sw : (c.sw ? c.en : "")}</p>
+                <p className="mt-6 text-sm text-foreground/50"><Bi sw="Gusa kuona" en="Tap to reveal" /></p>
               </>
             ) : (
               <>
@@ -95,8 +97,8 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
             <button className="btn-secondary" onClick={() => { setFlipped(false); setI((i + 1) % cards.length); }}>→</button>
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2">
-            <button className="btn-secondary" onClick={() => mark(false)}>Still learning</button>
-            <button className="btn-amber" onClick={() => mark(true)}>Got it ✓</button>
+            <button className="btn-secondary" onClick={() => mark(false)}><Bi sw="Bado najifunza" en="Still learning" /></button>
+            <button className="btn-amber" onClick={() => mark(true)}><Bi sw="Nimeelewa ✓" en="Got it ✓" /></button>
           </div>
         </div>
       )}

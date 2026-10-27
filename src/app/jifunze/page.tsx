@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { dialects } from "@/content/dialects";
+import { Bi } from "@/components/lang";
 
 export const metadata = { title: "Jifunze · Learn" };
 
 export default function Learn() {
   return (
     <div>
-      <h1 className="font-display text-3xl font-black text-navy">Jifunze Kichagga</h1>
+      <h1 className="font-display text-3xl font-black text-navy"><Bi sw="Jifunze Kichagga" en="Learn Kichagga" /></h1>
       <p className="mt-2 max-w-2xl text-foreground/80">
-        Pick your dialect. Each has short lessons with the English prompt, the Chagga phrase, and the yes/no replies —
-        the way the elders taught it. Audio from native speakers is added as it is contributed.
+        <Bi sw="Chagua lahaja yako. Kila moja ina masomo mafupi: Kichagga, Kiswahili na Kiingereza, na majibu ya ndiyo/hapana — jinsi wazee walivyofundisha. Sauti za wazungumzaji zinaongezwa zinapochangiwa."
+            en="Pick your dialect. Each has short lessons with the Chagga phrase, Swahili and English, and the yes/no replies — the way the elders taught it. Native-speaker audio is added as it is contributed." />
       </p>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {dialects.map((d) => (

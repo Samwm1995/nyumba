@@ -1,4 +1,5 @@
 import { attractions, payment } from "@/content/support";
+import { Bi } from "@/components/lang";
 
 export const metadata = { title: "Vivutio · Chagga attractions" };
 
@@ -10,10 +11,10 @@ export default function Attractions() {
     <div className="space-y-8">
       <div className="max-w-2xl">
         <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber">Vivutio</p>
-        <h1 className="font-display mt-1 text-3xl font-black text-navy">Tembelea Uchagga</h1>
+        <h1 className="font-display mt-1 text-3xl font-black text-navy"><Bi sw="Tembelea Uchagga" en="Visit Chagga country" /></h1>
         <p className="mt-3 text-lg text-foreground/80">
-          Maporomoko, mahandaki ya kale, makazi ya Mangi, vihamba vya kahawa — vivutio vya Kilimanjaro vilivyoelezwa na Wachagga wenyewe.
-          Safari zinapangwa na <b>Flightfront</b>, mshirika rasmi wa usafiri wa Nyumba ya Wachagga; sehemu ya mapato inarudi kwenye kazi ya kuhifadhi lugha.
+          <Bi sw={<>Maporomoko, mahandaki ya kale, makazi ya Mangi, vihamba vya kahawa — vivutio vya Kilimanjaro vilivyoelezwa na Wachagga wenyewe. Safari zinapangwa na <b>Flightfront</b>, mshirika rasmi wa usafiri wa Nyumba ya Wachagga; sehemu ya mapato inarudi kwenye kazi ya kuhifadhi lugha.</>}
+              en={<>Waterfalls, ancient tunnels, the seats of the Mangi, coffee homesteads — Kilimanjaro's attractions described by the Chagga themselves. Trips are arranged by <b>Flightfront</b>, our official travel partner; part of the proceeds funds the language archive.</>} />
         </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
@@ -29,7 +30,7 @@ export default function Attractions() {
             <div className="mt-3 flex flex-wrap gap-1">
               {a.tags.map((t) => <span key={t} className="rounded-full bg-ivory px-2 py-0.5 text-xs text-coffee">{t}</span>)}
             </div>
-            <a href={book(a.name)} target="_blank" rel="noreferrer" className="btn-primary mt-4">Panga safari na Flightfront</a>
+            <a href={book(a.name)} target="_blank" rel="noreferrer" className="btn-primary mt-4"><Bi sw="Panga safari na Flightfront" en="Book with Flightfront" /></a>
           </article>
         ))}
       </div>

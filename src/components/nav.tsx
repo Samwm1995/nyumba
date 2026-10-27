@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useLang } from "./lang";
 
 const links = [
   { href: "/jifunze", label: "Jifunze", en: "Learn" },
@@ -16,6 +17,7 @@ const links = [
 export function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
+  const { lang } = useLang();
   return (
     <>
       <nav className="hidden gap-1 lg:flex" aria-label="Main">
@@ -27,7 +29,7 @@ export function Nav() {
               href={l.href}
               className={`rounded-lg px-2.5 py-2 text-sm font-semibold ${active ? "bg-navy text-ivory" : l.href === "/unga-mkono" ? "bg-amber/20 text-navy hover:bg-amber/40" : "text-navy hover:bg-ivory"}`}
             >
-              {l.label}
+              {lang === "en" ? l.en : l.label}
             </Link>
           );
         })}
@@ -46,7 +48,7 @@ export function Nav() {
         <nav className="absolute inset-x-0 top-full border-b border-silver/60 bg-white p-2 shadow-lg lg:hidden" aria-label="Main">
           {links.map((l) => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-navy hover:bg-ivory">
-              {l.label} <span className="font-normal opacity-60">· {l.en}</span>
+              {lang === "en" ? l.en : l.label} <span className="font-normal opacity-60">· {lang === "en" ? l.label : l.en}</span>
             </Link>
           ))}
         </nav>
