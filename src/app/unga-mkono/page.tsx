@@ -39,11 +39,11 @@ export default function Support() {
           <ol className="mt-3 space-y-2 text-foreground/80">
             <li><b>1.</b> <Bi sw="Fungua M-Pesa, Tigo Pesa, Airtel Money, HaloPesa au app ya benki yako." en="Open M-Pesa, Tigo Pesa, Airtel Money, HaloPesa or your bank app (visitors: card link via WhatsApp)." /></li>
             <li><b>2.</b> <Bi sw={<>Chagua <b>Lipa kwa simu / Lipa Namba</b> na weka</>} en={<>Choose <b>Lipa Namba</b> and enter</>} /> <span className="ch text-xl">{payment.lipaNamba}</span> ({payment.accountName}) — <Bi sw={<>au <b>scan TanQR</b> hii.</>} en={<>or <b>scan this TanQR</b>.</>} /></li>
-            <li><b>3.</b> <Bi sw="Weka kiasi: Rafiki 10,000 · Mlezi 50,000 · Mzee wa Baraza 250,000 (au kiasi chochote cha mchango)." en="Amount: Rafiki 10,000 · Mlezi 50,000 · Mzee wa Baraza 250,000 (or any donation)." /></li>
+            <li><b>3.</b> <Bi sw="Weka kiasi: Meku 10,000 · Mangi 50,000 · Chifu 250,000 (au kiasi chochote cha mchango)." en="Amount: Meku 10,000 · Mangi 50,000 · Chifu 250,000 (or any donation)." /></li>
             <li><b>4.</b> <Bi sw="Tuma ujumbe wa uthibitisho na jina lako kwa WhatsApp ili tukuandikishe." en="Send the confirmation message and your name on WhatsApp so we can register you." /></li>
           </ol>
           <div className="mt-4 flex flex-wrap gap-2">
-            <a className="btn-amber" href={wa("Habari Nyumba ya Wachagga! Nimelipa uanachama wa [Rafiki/Mlezi/Mzee]. Jina langu: ____. Lahaja: ____. Ujumbe wa malipo: ____")} target="_blank" rel="noreferrer">Nimelipa — nitumie uthibitisho</a>
+            <a className="btn-amber" href={wa("Habari Nyumba ya Wachagga! Nimelipa uanachama wa [Meku/Mangi/Chifu]. Jina langu: ____. Lahaja: ____. Ujumbe wa malipo: ____")} target="_blank" rel="noreferrer">Nimelipa — nitumie uthibitisho</a>
             <a className="btn-secondary" href={wa("Habari! Nina swali kuhusu uanachama wa Nyumba ya Wachagga.")} target="_blank" rel="noreferrer">Nina swali</a>
           </div>
           <p className="mt-4 text-xs text-foreground/60">{payment.note} Uanachama ni wa mwaka mmoja kuanzia tarehe ya malipo; utakumbushwa siku 30 kabla haujaisha.</p>
@@ -51,7 +51,7 @@ export default function Support() {
       </section>
 
       <section className="card bg-navy p-6 text-ivory md:p-8">
-        <h2 className="font-display text-2xl font-bold"><Bi sw="Ukuta wa Marafiki" en="Wall of Friends" /></h2>
+        <h2 className="font-display text-2xl font-bold"><Bi sw="Ukuta wa Wameku" en="Wall of Elders" /></h2>
         <p className="mt-2 text-silver"><Bi sw="Majina ya wanachama waliounga mkono yanaonekana hapa. Kuwa wa kwanza." en="Supporting members are named here. Be the first." /></p>
       </section>
     </div>

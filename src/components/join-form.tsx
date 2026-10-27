@@ -71,9 +71,9 @@ function ChaggaForm({ back }: { back: () => void }) {
       <label className="block"><span className="text-sm font-semibold text-navy"><Bi sw="Uanachama" en="Membership" /></span>
         <select name="tier" className="mt-1 w-full rounded-xl border border-silver p-3">
           <option value="Bure">Bure — nataka tu taarifa</option>
-          <option value="Rafiki 10,000">Rafiki — TZS 10,000 / mwaka</option>
-          <option value="Mlezi 50,000">Mlezi — TZS 50,000 / mwaka</option>
-          <option value="Mzee wa Baraza 250,000">Mzee wa Baraza — TZS 250,000 / mwaka</option>
+          <option value="Meku 10,000">Meku — TZS 10,000 / mwaka</option>
+          <option value="Mangi 50,000">Mangi — TZS 50,000 / mwaka</option>
+          <option value="Chifu 250,000">Chifu — TZS 250,000 / mwaka</option>
         </select></label>
       <label className="flex items-center gap-3 rounded-xl border border-silver p-3"><input type="checkbox" name="can_record" className="h-5 w-5" /><span><Bi sw="Naweza kurekodi wazee eneo langu" en="I can record elders in my area" /></span></label>
       <label className="block"><span className="text-sm font-semibold text-navy"><Bi sw="Mengine" en="Anything else" /></span><textarea name="note" rows={2} className="mt-1 w-full rounded-xl border border-silver p-3" /></label>

@@ -8,9 +8,9 @@ export const payment = {
 };
 
 export const tiers = [
-  { key: "rafiki", name: "Rafiki", sw: "Rafiki wa Nyumba", price: 10000, period: "kwa mwaka", perks: ["Jina lako kwenye Ukuta wa Marafiki", "Taarifa za masomo na matukio mapya kwanza", "Kadi ya uanachama (PDF)"] },
-  { key: "mlezi", name: "Mlezi", sw: "Mlezi wa Lahaja", price: 50000, period: "kwa mwaka", perks: ["Yote ya Rafiki", "Kitabu cha misemo kilichochapishwa (A5)", "Shukrani kwenye ukurasa wa lahaja unayoichagua", "Mwaliko wa Siku ya Kurekodi"], featured: true },
-  { key: "mzee", name: "Mzee wa Baraza", sw: "Mzee wa Baraza", price: 250000, period: "kwa mwaka", perks: ["Yote ya Mlezi", "Jina/nembo kwenye ukurasa wa mbele", "Nakala 5 za kitabu kwa shule au kanisa unalochagua", "Kiti cha ushauri kwenye Baraza la Nyumba"] },
+  { key: "meku", name: "Meku", sw: "Meku · Mzee wa Nyumba", price: 10000, period: "kwa mwaka", perks: ["Jina lako kwenye Ukuta wa Wameku", "Taarifa za masomo na matukio mapya kwanza", "Kadi ya uanachama (PDF)"] },
+  { key: "mangi", name: "Mangi", sw: "Mangi · Mlezi wa Lahaja", price: 50000, period: "kwa mwaka", perks: ["Yote ya Meku", "Kitabu cha misemo kilichochapishwa (A5)", "Shukrani kwenye ukurasa wa lahaja unayoichagua", "Mwaliko wa Siku ya Kurekodi"], featured: true },
+  { key: "chifu", name: "Chifu", sw: "Chifu · Mkuu wa Baraza", price: 250000, period: "kwa mwaka", perks: ["Yote ya Mangi", "Jina/nembo kwenye ukurasa wa mbele", "Nakala 5 za kitabu kwa shule au kanisa unalochagua", "Kiti cha ushauri kwenye Baraza la Nyumba"] },
 ];
 
 export const sponsorPackages = [
