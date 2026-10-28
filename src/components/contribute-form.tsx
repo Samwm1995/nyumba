@@ -17,7 +17,9 @@ const kinds = [
 ] as const;
 
 export function ContributeForm() {
-  const topic = useSearchParams().get("topic") ?? "";
+  const sp = useSearchParams();
+  const topic = sp.get("topic") ?? "";
+  const kindPreset = sp.get("kind") ?? "phrase";
   const [rec, setRec] = useState<MediaRecorder | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
   const [url, setUrl] = useState<string>("");
@@ -114,7 +116,7 @@ export function ContributeForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="text-sm font-semibold text-navy">What is it?</span>
-          <select name="kind" required className="mt-1 w-full rounded-xl border border-silver p-3">
+          <select name="kind" required defaultValue={kindPreset} className="mt-1 w-full rounded-xl border border-silver p-3">
             {kinds.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
           </select>
         </label>
@@ -127,6 +129,7 @@ export function ContributeForm() {
         </label>
       </div>
       <input type="hidden" name="topic" value={topic} />
+      {topic && <p className="rounded-xl bg-amber/10 p-3 text-sm text-navy">{topic.startsWith("ukoo:") ? <Bi sw={<>Ukoo: <b>{topic.slice(5)}</b> — andika eneo la asili, maana ya jina, babu wa kwanza, miiko, na chochote familia inachokijua. Kwenye kisanduku cha Kichagga andika jina la ukoo.</>} en={<>Clan: <b>{topic.slice(5)}</b> — give the home area, meaning of the name, first ancestor, taboos, anything the family knows. Put the clan name in the Chagga box.</>} /> : topic.startsWith("wimbo:") ? <Bi sw={<>Wimbo: <b>{topic.slice(6)}</b> — andika mistari unayoisikia kwa Kichagga, na maana yake kwa Kiswahili/Kiingereza. Mistari michache inatosha.</>} en={<>Song: <b>{topic.slice(6)}</b> — write the lines you can hear in Chagga and their meaning in Swahili/English. A few lines is enough.</>} /> : <>{topic}</>}</p>}
 
       <fieldset className="rounded-xl border border-silver p-4">
         <legend className="px-1 text-sm font-semibold text-navy">Recording (optional but valuable)</legend>

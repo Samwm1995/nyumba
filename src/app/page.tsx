@@ -70,7 +70,7 @@ export default function Home() {
         <h2 className="font-display text-2xl font-bold text-navy"><Bi sw="Utamaduni" en="Culture" /></h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {pillars.map((p) => (
-            <Link key={p.key} href={`/utamaduni#${p.key}`} className="card overflow-hidden hover:border-navy/40">
+            <Link key={p.key} href={p.key === "ukoo" ? "/koo" : p.key === "nyimbo" ? "/nyimbo" : `/utamaduni#${p.key}`} className="card overflow-hidden hover:border-navy/40">
               <Photo k={pillarPhoto[p.key] ?? "mbege"} ratio="aspect-[3/2]" sizes="(min-width: 1024px) 20vw, 50vw" className="!rounded-none" />
               <div className="p-4">
               <h3 className="font-display font-bold text-navy">{p.sw}</h3>

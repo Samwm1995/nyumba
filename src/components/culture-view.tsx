@@ -23,8 +23,10 @@ export function CultureIndex() {
           <section key={p.key} id={p.key} className="scroll-mt-20">
             <h2 className="font-display text-2xl font-bold text-navy">{lang === "en" ? p.name : p.sw} <span className="text-base font-normal text-foreground/50">· {lang === "en" ? p.sw : p.name}</span></h2>
             <p className="text-foreground/70">{lang === "en" ? p.blurb : pillarsSw[p.key]?.blurb ?? p.blurb}</p>
+            {p.key === "ukoo" && <Link href="/koo" className="btn-primary mt-3 inline-block"><Bi sw="Fungua orodha ya koo →" en="Open the clan directory →" /></Link>}
+            {p.key === "nyimbo" && <Link href="/nyimbo" className="btn-primary mt-3 inline-block"><Bi sw="Sikiliza nyimbo za Kichagga →" en="Listen to Chagga songs →" /></Link>}
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              {list.map((a) => {
+              {list.filter((a) => a.slug !== "ukoo").map((a) => {
                 const sw = articlesSw[a.slug];
                 return (
                   <Link key={a.slug} href={`/utamaduni/${a.slug}`} className="card flex overflow-hidden hover:border-navy/40">
