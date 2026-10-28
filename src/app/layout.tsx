@@ -5,6 +5,7 @@ import "./globals.css";
 import { Nav } from "@/components/nav";
 import { LangProvider, LangToggle } from "@/components/lang";
 import { AuthProvider } from "@/lib/auth";
+import { Footer } from "@/components/footer";
 
 
 export const metadata: Metadata = {
@@ -39,12 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
-        <footer className="border-t border-silver/60 bg-navy text-ivory">
-          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-display font-semibold tracking-wide">Vijana wa Kichagga · Kilimanjaro ni Kwetu</p>
-            <p className="text-silver">Kizazi Kipya · <Link href="/unga-mkono" className="underline">Unga mkono</Link> · <Link href="/wadhamini" className="underline">Wadhamini</Link> · <Link href="/vivutio" className="underline">Vivutio</Link></p>
-          </div>
-        </footer>
+        <Footer />
         </AuthProvider></LangProvider>
       </body>
     </html>

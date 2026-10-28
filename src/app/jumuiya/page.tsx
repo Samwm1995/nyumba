@@ -14,7 +14,7 @@ export default function Community() {
         </p>
         <JoinForm />
       </section>
-      <section>
+      <section id="matukio" className="scroll-mt-24">
         <h2 className="font-display text-2xl font-bold text-navy">Matukio · Events</h2>
         <p className="mt-2 text-foreground/80">Meetups, home visits, recording days and ceremonies members are welcome at.</p>
         <EventsList />
