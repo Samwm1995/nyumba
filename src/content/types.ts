@@ -29,7 +29,7 @@ export type Dialect = {
 
 export type CultureArticle = {
   slug: string;
-  pillar: "mila" | "historia" | "chakula" | "nyimbo" | "ukoo";
+  pillar: "mila" | "historia" | "chakula" | "nyimbo" | "ukoo" | "dini";
   title: string;
   summary: string;
   body: string[];

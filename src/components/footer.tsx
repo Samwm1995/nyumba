@@ -37,6 +37,7 @@ export function Footer() {
           <Link href="/nyimbo" className={`block ${a}`}><Bi sw="Nyimbo" en="Songs" /></Link>
           <Link href="/utamaduni#chakula" className={`block ${a}`}><Bi sw="Chakula na mbege" en="Food & mbege" /></Link>
           <Link href="/utamaduni#historia" className={`block ${a}`}><Bi sw="Historia na Mangi" en="History & the Mangi" /></Link>
+          <Link href="/utamaduni/sala-ya-bwana" className={`block ${a}`}><Bi sw="Dini · Sala ya Bwana" en="Faith · The Lord's Prayer" /></Link>
           <Link href="/vivutio" className={`block ${a}`}><Bi sw="Vivutio · tembelea Uchagga" en="Visit Chagga country" /></Link>
         </nav>
 

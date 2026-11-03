@@ -5,6 +5,7 @@ import { articles, pillars } from "@/content/culture";
 import { articlesSw, pillarsSw } from "@/content/culture-sw";
 import { articleImage } from "@/content/images";
 import { Photo } from "./photo";
+import { lordsPrayerVunjo } from "@/content/prayers";
 
 export function CultureIndex() {
   const { lang } = useLang();
@@ -60,11 +61,43 @@ export function CultureArticle({ slug }: { slug: string }) {
       <p className="mt-2 text-lg text-foreground/80">{useSw ? sw.summary : a.summary}</p>
       {articleImage[slug] && <Photo k={articleImage[slug]} ratio="aspect-[16/9]" sizes="(min-width: 768px) 672px, 100vw" className="mt-5" />}
       <div className="mt-6 space-y-4 text-lg leading-relaxed">{(useSw ? sw.body : a.body).map((p, i) => <p key={i}>{p}</p>)}</div>
+      {slug === "sala-ya-bwana" && <Prayer lang={lang} />}
+      {slug === "ukristo" && <div className="mt-6"><Link href="/utamaduni/sala-ya-bwana" className="btn-primary"><Bi sw="Sala ya Bwana kwa Kivunjo →" en="The Lord's Prayer in Kivunjo →" /></Link></div>}
       {a.source && <p className="mt-6 text-sm text-foreground/60"><Bi sw="Chanzo" en="Source" />: {a.source}</p>}
       <div className="card mt-8 bg-ivory p-4">
         <p className="font-semibold text-navy"><Bi sw="Unajua zaidi kuhusu hili?" en="Know more about this?" /></p>
         <p className="text-sm text-foreground/80"><Bi sw="Ongeza masahihisho, hadithi ya familia yako, au rekodi ya mzee." en="Add a correction, a story from your family, or a recording of an elder." /> <Link href={`/changia?topic=${a.slug}`} className="underline"><Bi sw="Changia →" en="Contribute →" /></Link></p>
       </div>
     </article>
+  );
+}
+
+function Prayer({ lang }: { lang: string }) {
+  const p = lordsPrayerVunjo;
+  const en = lang === "en";
+  return (
+    <section className="mt-6">
+      <div className="card bg-navy p-5 text-ivory md:p-7">
+        <p className="font-display text-xs font-semibold uppercase tracking-[0.3em] text-amber">Kivunjo</p>
+        <h2 className="font-display mt-1 text-2xl font-bold">Kiterewo kya Mndumii</h2>
+        <ol className="mt-4 space-y-4">
+          {p.lines.map((l, i) => (
+            <li key={i} className="border-l-2 border-amber/60 pl-4">
+              <p className="ch text-xl leading-snug">{l.ch}</p>
+              <p className="mt-1 text-sm text-silver">{en ? l.en : l.sw}</p>
+              <p className="text-xs text-silver/60">{en ? l.sw : l.en}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <h3 className="mt-6 font-display text-lg font-bold text-navy"><Bi sw="Maneno muhimu" en="Key words" /></h3>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {p.words.map((w) => <span key={w.ch} className="rounded-lg border border-silver px-2 py-1 text-sm"><span className="ch">{w.ch}</span> · {en ? w.en : w.sw}</span>)}
+      </div>
+      <div className="card mt-6 bg-ivory p-4 text-sm text-foreground/80">
+        <Bi sw={<>Unaijua sala hii kwa <b>Kimachame, Kikibosho au Kirombo</b>, au una rekodi ya mzee akiiomba? <Link href="/changia?kind=phrase&topic=sala:baba-yetu" className="underline">Tuma hapa</Link> — tutaiweka bega kwa bega na Kivunjo.</>}
+            en={<>Do you know this prayer in <b>Kimachame, Kikibosho or Kirombo</b>, or have a recording of an elder praying it? <Link href="/changia?kind=phrase&topic=sala:baba-yetu" className="underline">Send it here</Link> — we'll place it side by side with the Kivunjo.</>} />
+      </div>
+    </section>
   );
 }

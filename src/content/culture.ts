@@ -6,6 +6,7 @@ export const pillars: { key: CultureArticle["pillar"]; name: string; sw: string;
   { key: "chakula", name: "Food & drink", sw: "Chakula", blurb: "Mtori, kiburu, machalari, mbege — and when they are served." },
   { key: "nyimbo", name: "Songs & proverbs", sw: "Nyimbo na Methali", blurb: "Songs, sayings and folktales from the elders." },
   { key: "ukoo", name: "Clans", sw: "Ukoo", blurb: "Clan names, their areas and family lines." },
+  { key: "dini", name: "Faith", sw: "Dini na Imani", blurb: "Ruwa, the ancestors, the coming of the Church — and prayers in Kichagga." },
 ];
 
 // Seed articles. Short on purpose: each is a starting point for the community to expand and verify.
@@ -101,5 +102,39 @@ export const articles: CultureArticle[] = [
     body: [
       "Chagga surnames are clan names, and most are tied to a specific area of the mountain. Add your clan, its home area and anything your family knows of its origin under Changia.",
     ],
+  },
+  {
+    slug: "ruwa",
+    pillar: "dini",
+    title: "Ruwa — God of the mountain",
+    summary: "Before the missions, the Chagga already prayed to one God, Ruwa, who dwells above Kibo; the ancestors (warimu) stood between the living and Him.",
+    body: [
+      "Ruwa is the Chagga name for God — the same word as the sun and the sky in older speech. The mountain itself was His seat: people prayed and poured offerings facing Kibo, and the snows were called the brow of God (Ushangunyi lo Ruwa).",
+      "Ruwa was good and distant. Daily life was mediated by the ancestors, warimu, who watched over the kihamba and could bring sickness or blessing. Families kept their peace through offerings of mbege, milk and meat poured at the foot of the masale plant, with the eldest man of the lineage speaking the words.",
+      "Rites marked the whole of life: the naming of a child, initiation and the teaching of elders, marriage with the mkara as trustee, and burial within the kihamba so that a person stayed with the family land. Much of this vocabulary — kuterewa (to pray), warimu, isale — is still used in church and at home.",
+      "This is a living subject: add what your elders say about Ruwa, warimu and the old prayers under Changia, in your dialect.",
+    ],
+    source: "Community knowledge; Leeman & Lauwo (2015) for vocabulary (Ruwa, Ushangunyi lo Ruwa, Shiimbo sha Ruwa).",
+  },
+  {
+    slug: "ukristo",
+    pillar: "dini",
+    title: "The coming of the Church",
+    summary: "Catholic missionaries settled at Kilema in 1890 and Lutherans at Machame and Old Moshi in 1893; within two generations most Chagga were Christian — and Kichagga entered the hymn book.",
+    body: [
+      "The Holy Ghost Fathers founded the Catholic mission at Kilema in 1890, and the Leipzig Lutheran mission opened at Machame and Old Moshi (Kidia) in 1893. Marangu, Mamba, Mwika and Rombo followed. Mission schools, the coffee cooperative movement and the churches grew together, which is why Chagga communities are so strongly tied to their parishes to this day.",
+      "The missionaries studied the dialects. Early catechisms, hymns and parts of the Bible were printed in Kimachame and Kimoshi/Kivunjo, and the Lord's Prayer and hymns (shiimbo sha Ruwa) were sung in Kichagga long before Swahili took over in church.",
+      "Today most Chagga are Lutheran (ELCT Northern Diocese) or Catholic (Diocese of Moshi), with Muslim families especially in the towns. Christian feasts — Christmas and New Year above all — are when the diaspora comes home, and when Kichagga is heard most in church and at the table.",
+      "We are collecting prayers, hymns and blessings in every dialect. The Lord's Prayer in Kivunjo is below; send yours in Kimachame, Kikibosho or Kirombo.",
+    ],
+    source: "Mission histories of Kilimanjaro (Kilema 1890; Machame and Old Moshi 1893); community knowledge.",
+  },
+  {
+    slug: "sala-ya-bwana",
+    pillar: "dini",
+    title: "The Lord's Prayer — Kiterewo kya Mndumii (Kivunjo)",
+    summary: "Sala ya Baba Yetu in Kivunjo, line by line with Swahili and English, as prayed in Vunjo churches.",
+    body: [],
+    source: "Leeman & Lauwo (2015), with the authors' permission; shared by Sam Makundi.",
   },
 ];

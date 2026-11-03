@@ -32,5 +32,5 @@ export const attractionImage: Record<string, ImgKey> = {
 };
 export const articleImage: Record<string, ImgKey> = {
   mbege: "mbege", "maruu-na-nyama": "mbegeSeller", kihamba: "coffee", mifongo: "maranguRoute", mreshe: "marangu",
-  mangi: "marealle", "kinyala-lauwo": "kibo", methali: "chaggaDecember", ukoo: "chaggaDecember",
+  mangi: "marealle", "kinyala-lauwo": "kibo", methali: "chaggaDecember", ukoo: "chaggaDecember", ruwa: "kibo", ukristo: "marangu", "sala-ya-bwana": "maranguRoute",
 };

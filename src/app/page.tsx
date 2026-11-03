@@ -6,7 +6,7 @@ import { Bi } from "@/components/lang";
 import { Photo } from "@/components/photo";
 import type { ImgKey } from "@/content/images";
 
-const pillarPhoto: Record<string, ImgKey> = { mila: "chaggaDecember", historia: "marealle", chakula: "mbege", nyimbo: "mbegeSeller", ukoo: "marangu" };
+const pillarPhoto: Record<string, ImgKey> = { mila: "chaggaDecember", historia: "marealle", chakula: "mbege", nyimbo: "mbegeSeller", ukoo: "marangu", dini: "kibo" };
 
 export default function Home() {
   const vunjo = dialects.find((d) => d.slug === "vunjo")!;
@@ -68,7 +68,7 @@ export default function Home() {
 
       <section>
         <h2 className="font-display text-2xl font-bold text-navy"><Bi sw="Utamaduni" en="Culture" /></h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p) => (
             <Link key={p.key} href={p.key === "ukoo" ? "/koo" : p.key === "nyimbo" ? "/nyimbo" : `/utamaduni#${p.key}`} className="card overflow-hidden hover:border-navy/40">
               <Photo k={pillarPhoto[p.key] ?? "mbege"} ratio="aspect-[3/2]" sizes="(min-width: 1024px) 20vw, 50vw" className="!rounded-none" />

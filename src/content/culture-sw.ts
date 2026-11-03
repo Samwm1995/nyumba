@@ -5,6 +5,7 @@ export const pillarsSw: Record<string, { blurb: string }> = {
   chakula: { blurb: "Mtori, kiburu, machalari, mbege — na zinapotolewa." },
   nyimbo: { blurb: "Nyimbo, methali na hadithi kutoka kwa wazee." },
   ukoo: { blurb: "Majina ya koo, maeneo yao na nasaba." },
+  dini: { blurb: "Ruwa, warimu, ujio wa Kanisa — na sala kwa Kichagga." },
 };
 
 export const articlesSw: Record<string, { title: string; summary: string; body: string[] }> = {
@@ -78,5 +79,30 @@ export const articlesSw: Record<string, { title: string; summary: string; body: 
     body: [
       "Majina ya ukoo ya Kichagga ni majina ya koo, na mengi yanahusiana na eneo mahususi la mlima. Ongeza ukoo wako, eneo lake la asili na chochote familia yako inachokijua kuhusu asili yake kupitia Changia.",
     ],
+  },
+  ruwa: {
+    title: "Ruwa — Mungu wa mlima",
+    summary: "Kabla ya misheni, Wachagga walikuwa tayari wanamwomba Mungu mmoja, Ruwa, aliyeketi juu ya Kibo; warimu (mizimu ya wazee) walisimama kati ya walio hai na Yeye.",
+    body: [
+      "Ruwa ni jina la Mungu kwa Kichagga — neno lilelile la jua na anga katika usemi wa zamani. Mlima wenyewe ulikuwa kiti chake: watu waliomba na kumwaga sadaka wakielekea Kibo, na theluji iliitwa paji la uso wa Mungu (Ushangunyi lo Ruwa).",
+      "Ruwa alikuwa mwema na wa mbali. Maisha ya kila siku yalisimamiwa na warimu, waliolinda kihamba na walioweza kuleta ugonjwa au baraka. Familia ilidumisha amani kwa sadaka za mbege, maziwa na nyama zilizomwagwa chini ya masale, mzee wa ukoo akisema maneno.",
+      "Matambiko yaliandamana na maisha yote: kumpa mtoto jina, jando na mafunzo ya wazee, ndoa yenye mkara kama mdhamini, na mazishi ndani ya kihamba ili mtu abaki na ardhi ya familia. Msamiati huu — kuterewa (kuomba), warimu, isale — bado unatumika kanisani na nyumbani.",
+      "Hili ni somo linaloendelea: ongeza wanachosema wazee wako kuhusu Ruwa, warimu na sala za zamani kupitia Changia, kwa lahaja yako.",
+    ],
+  },
+  ukristo: {
+    title: "Ujio wa Kanisa",
+    summary: "Wamisionari Wakatoliki walijenga Kilema mwaka 1890 na Walutheri Machame na Old Moshi 1893; ndani ya vizazi viwili Wachagga wengi walikuwa Wakristo — na Kichagga kikaingia kwenye kitabu cha nyimbo.",
+    body: [
+      "Mapadri wa Roho Mtakatifu walianzisha misheni ya Kikatoliki Kilema 1890, na misheni ya Kilutheri ya Leipzig ikafunguliwa Machame na Old Moshi (Kidia) 1893. Marangu, Mamba, Mwika na Rombo zikafuata. Shule za misheni, vyama vya ushirika vya kahawa na makanisa vilikua pamoja — ndiyo maana jamii za Kichagga zimefungamana sana na parokia zao hadi leo.",
+      "Wamisionari walijifunza lahaja. Katekisimu, nyimbo na sehemu za Biblia zilichapishwa kwa Kimachame na Kimoshi/Kivunjo, na Sala ya Bwana na nyimbo (shiimbo sha Ruwa) ziliimbwa kwa Kichagga muda mrefu kabla Kiswahili hakijachukua nafasi kanisani.",
+      "Leo Wachagga wengi ni Walutheri (KKKT Dayosisi ya Kaskazini) au Wakatoliki (Jimbo la Moshi), na familia za Kiislamu hasa mijini. Sikukuu za Kikristo — Krismasi na Mwaka Mpya zaidi — ndizo wakati ughaibuni unarudi nyumbani, na Kichagga kinasikika zaidi kanisani na mezani.",
+      "Tunakusanya sala, nyimbo na baraka kwa kila lahaja. Sala ya Bwana kwa Kivunjo iko hapa chini; tuma yako kwa Kimachame, Kikibosho au Kirombo.",
+    ],
+  },
+  "sala-ya-bwana": {
+    title: "Sala ya Bwana — Kiterewo kya Mndumii (Kivunjo)",
+    summary: "Baba Yetu kwa Kivunjo, mstari kwa mstari na Kiswahili na Kiingereza, kama inavyoombwa makanisani Vunjo.",
+    body: [],
   },
 };
