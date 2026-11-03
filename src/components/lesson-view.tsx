@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Lesson } from "@/content/types";
 import { Bi, useLang } from "./lang";
+import { ShareCard } from "./share-card";
 
 type Card = { en: string; sw?: string; ch: string; yes?: string; no?: string; reply?: string; audio?: string };
 
@@ -42,6 +43,7 @@ export function LessonView({ lesson, dialect }: { lesson: Lesson; dialect: strin
       <div className="flex flex-wrap items-center gap-2">
         <button className={mode === "list" ? "btn-primary" : "btn-secondary"} onClick={() => setMode("list")}><Bi sw="Orodha" en="List" /></button>
         <button className={mode === "cards" ? "btn-primary" : "btn-secondary"} onClick={() => setMode("cards")}><Bi sw="Kadi" en="Flashcards" /></button>
+        <ShareCard dialect={dialect} lesson={lesson.slug} parts={Math.max(1, Math.ceil(cards.length / 6))} title={lesson.title} />
         <span className="ml-auto text-sm text-foreground/60">{known.size}/{cards.length} <Bi sw="umejifunza" en="learned" /></span>
       </div>
 

@@ -19,8 +19,9 @@ export const viewport: Viewport = { themeColor: "#0b1f33" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="sw" className="h-full antialiased">
+    <html lang="sw" translate="no" className="notranslate h-full antialiased">
       <head>
+        <meta name="google" content="notranslate" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />

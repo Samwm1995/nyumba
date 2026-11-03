@@ -6,6 +6,7 @@ import { articlesSw, pillarsSw } from "@/content/culture-sw";
 import { articleImage } from "@/content/images";
 import { Photo } from "./photo";
 import { lordsPrayerVunjo } from "@/content/prayers";
+import { ShareCard } from "./share-card";
 
 export function CultureIndex() {
   const { lang } = useLang();
@@ -90,6 +91,7 @@ function Prayer({ lang }: { lang: string }) {
           ))}
         </ol>
       </div>
+      <div className="mt-4"><ShareCard dialect="vunjo" lesson="sala-ya-bwana" title="Sala ya Bwana — Kiterewo kya Mndumii" /></div>
       <h3 className="mt-6 font-display text-lg font-bold text-navy"><Bi sw="Maneno muhimu" en="Key words" /></h3>
       <div className="mt-2 flex flex-wrap gap-1.5">
         {p.words.map((w) => <span key={w.ch} className="rounded-lg border border-silver px-2 py-1 text-sm"><span className="ch">{w.ch}</span> · {en ? w.en : w.sw}</span>)}
